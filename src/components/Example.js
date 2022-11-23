@@ -1,22 +1,18 @@
-import React from 'react'
-import Container from './Container'
-import './Example.css'
-import Profile from './Profile'
+// POINT propsの流れは一方通行
+// POINT propsは読み取り専用
+
+import Bye from "./Bye"
+import Hello from "./Hello"
 
 const Example = () => {
-  const profile = [
-    {name: "Takashi", age: 19, country: "Japan", color: "red"},
-    {name: "Jane", age: 28, country: "UK", color: "blue"},
-  ]
+  const name = "Tom";
 
   return (
     <>
-      <Container title="Childrenとは?">
-        <Profile {...profile[0]}/>
-        <Profile {...profile[1]} />
-      </Container>
+      <Hello name={name}/>
+      <Bye name={name}/>
     </>
-  )
-}
+  );
+};
 
-export { Example }
+export {Example};
