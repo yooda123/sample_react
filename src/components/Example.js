@@ -1,22 +1,19 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const Example = () => {
-  let displayVal;
-  let [ val, setVal ] = useState();
-  console.log('再レンダリングされました');
+  const [valA, setValA] = useState(0);
+  const [valB, setValB] = useState(0);
+  const [valC, setValC] = useState(0);
   return (
     <>
-      <input
-        type="text"
-        onChange={(e) => {
-          console.log(e.target.value);
-          setVal(e.target.value);
-          // displayVal = e.target.value;
-        }}
-      />
-      = {val}
+      <p>ボタンAを{valA}回押しました！</p>    
+      <button onClick = {() => {setValA(valA+1);}}>ボタンA</button>
+      <p>ボタンBを{valB}回押しました！</p>    
+      <button onClick = {() => {setValB(valB+1);}}>ボタンB</button>
+      <p>ボタンCを{valC}回押しました！</p>    
+      <button onClick = {() => {setValC(valC+1);}}>ボタンC</button>
     </>
-  );
+  )
 };
 
 export default Example;
