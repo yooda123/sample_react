@@ -1,14 +1,20 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 const Example = () => {
-  let [val, setVal] = useState(0);
-  // console.log(valArray);
+  let displayVal;
+  let [ val, setVal ] = useState();
+  console.log('再レンダリングされました');
   return (
     <>
-      <input 
+      <input
         type="text"
-        onChange={(e) => setVal(e.target.value)}
-      /> = {val} 
+        onChange={(e) => {
+          console.log(e.target.value);
+          setVal(e.target.value);
+          // displayVal = e.target.value;
+        }}
+      />
+      = {val}
     </>
   );
 };
