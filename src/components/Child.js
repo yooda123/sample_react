@@ -7,12 +7,11 @@
 
 import React from "react"
 
-const Child = () => {
-  const a = 1
+const Child = (props) => {
+  // console.log(props)
   return (
-    <div className="component">
-      <h3>式と文</h3>
-      {`${a}とは`}
+    <div className={`component ${props.color}`}>
+      <h3>Hello Component</h3>
     </div>
   )
 }

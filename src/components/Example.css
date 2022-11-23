@@ -3,3 +3,9 @@
   color: blue;
   border: 5px solid blue;
 }
+
+.component.red {
+  padding: 1rem;
+  color: red;
+  border: 5px solid red;
+}

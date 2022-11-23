@@ -1,16 +1,14 @@
 import React from 'react'
 import { Child } from './Child'
-import "./Example.css"
-import Expression from './Expression'
+import './Example.css'
 
 const Example = () => {
   return (
     <>
-    <Child />
-    <Expression />
+      <Child />;
+      <Child color="red" />;
     </>
   )
 }
-
 
 export { Example }
