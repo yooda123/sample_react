@@ -1,18 +1,13 @@
-// POINT propsの流れは一方通行
-// POINT propsは読み取り専用
-
-import Bye from "./Bye"
-import Hello from "./Hello"
-
 const Example = () => {
-  const name = "Tom";
-
+  const clickHandler = () => {
+    alert('ボタンがクリックされました')
+  }
   return (
     <>
-      <Hello name={name}/>
-      <Bye name={name}/>
-    </>
+      <button onClick={() => clickHandler()}>クリックしてね</button>
+      <button>クリックしてね</button>
+    </> 
   );
 };
 
-export {Example};
+export default Example;
