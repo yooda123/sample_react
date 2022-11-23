@@ -1,11 +1,10 @@
+import React from 'react'
+import { Child } from './Child'
 import "./Example.css"
 
 const Example = () => {
-  return (
-    <div className="component">
-      <h3>Hello Example Component</h3>
-    </div>
-  );
-};
+  return <Child />
+}
 
-export default Example;
+
+export { Example }
