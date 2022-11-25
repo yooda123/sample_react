@@ -1,21 +1,30 @@
-import { useState } from "react";
-import AnimalFilter from "./AnimalFilter";
-import AnimalList from "./AnimalList";
+import { useState } from 'react';
 
 const Example = () => {
-  const animals = ["Dog", "Cat", "Rat"];
-
-  const [filterVal, setFilterVal] = useState("");
-
-  const filterAnimals = animals.filter((animal) => {
-    const isMatch = animal.indexOf(filterVal) !== -1;
-    return isMatch;
-  });
-
+  const [val, setVal] = useState("");
   return (
     <>
-      <AnimalFilter filterState={[filterVal, setFilterVal]} />
-      <AnimalList animals={filterAnimals} />
+      {/* labelをクリックすると、同じidのtextareaがフォーカスされる*/}
+      <label htmlFor="456">ラベル</label> 
+      <div>
+        <input 
+          type="text"
+          id="123"
+          placeholder="こんにちは"
+          value={val}
+          onChange={(e) => setVal(e.target.value)} 
+        />
+      </div>
+      <div>
+        <textarea
+          id="456"
+          placeholder="こんにちはTextArea"
+          value={val}
+          onChange={(e) => setVal(e.target.value)} 
+        />
+      </div>
+      <h3>{val}</h3>
+      <button onClick={() => setVal("")}>クリア</button>
     </>
   );
 };
