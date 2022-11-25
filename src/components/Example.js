@@ -1,36 +1,27 @@
-import {useState} from 'react';
+
+const animals = ["Dog", "Cat", "Rat"];
 
 const Example = () => {
-  const [ count, setCount ] = useState(0);
-  const countUp = () => {setCount(count+1)};
-  const countDown = () => {setCount(prevstate => prevstate -1)};
+  // 対応案１
+  const animalsList = [];
+  for (const animal of animals) {
+    animalsList.push(<li>{animal}</li>);
+  }
+
+  // 対応案２
+  const helloAnimals = animals.map((animal) => 
+    <li key={animal}>Hello, {animal}</li>);
+
   return (
     <>
-      <h3>練習問題</h3>
-      <p>カウントの更新（CountUpdate）と表示（CountResult）を別のコンポーネントに分離してください。Exampleコンポーネント内で現在のカウントの値を管理するstateを一つ定義してこれまでのレクチャーで実装したようなカウンターを作成してください。</p>
-      <CountResult title="カウント" count={count}/>
-      <CountUpdate countUp={countUp} countDown={countDown}/> 
-      {/* <CountUpdate setCount={setCount} />  */}
-    </>
-  );
-};
+      <h3>配列の操作</h3>
+      <ul>
+        {/* 対応案１ */}
+        {animalsList}
 
-const CountResult = ({title, count}) => <h3>{title}:{count}</h3>
-
-const CountUpdate = ({countUp, countDown}) => {
-// const CountUpdate = ({setCount}) => {
-  // const countUp = () => {;
-  //   // setCount(prev => prev + 1)
-  //   countUp1();
-  // };
-  // const countDown = () => {
-  //   // setCount(prev => prev - 1)
-  //   countDown1();
-  // };
-  return (
-    <>
-      <button onClick={countUp}>+</button>
-      <button onClick={countDown}>-</button>
+        {/* 対応案２ */}
+        {helloAnimals}
+      </ul>
     </>
   );
 };
