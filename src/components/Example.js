@@ -1,40 +1,43 @@
-import Profile from "./Profile";
-import {useState} from 'react';
-
-const persons = [
-  {
-    name: "Geo",
-    age: 18,
-    hobbies: ["sports", "music"],
-  },
-  {
-    name: "Tom",
-    age: 25,
-    hobbies: ["movie", "music"],
-  },
-  {
-    name: "Lisa",
-    age: 21,
-    hobbies: ["sports", "travel", "game"],
-  },
-];
+import { useState } from "react";
 
 const Example = () => {
-  const [inputVal, setinputVal] = useState("");
+  const animals = ["Dog", "Cat", null, "Rat"];
+
+  const [filterVal, setFilterVal] = useState("");
 
   return (
     <>
-      <h3>練習問題</h3>
-      <p>入力欄を設置して、入力値と名前が一致したもののみ表示する仕組みを作成してください。</p>
-      <input type="text" value={inputVal} onChange={(e)=>setinputVal(e.target.value)} />
+      <input
+        type="text"
+        value={filterVal}
+        onChange={(e) => setFilterVal(e.target.value)}
+      />
       <ul>
-        {persons
-        .filter((person) => person.name.indexOf(inputVal) !== -1)
-        .map((person) => (
-          <li key={person.name}>
-            <Profile {...person} />
-          </li>
-        ))}
+        {animals
+          .filter((animal) => {
+            // ?? (Null合体演算子)
+            // A ?? B
+            // A === (null or undefined)  --> B
+            const animalStr = animal ?? "";
+            const isMatch = animalStr.indexOf(filterVal) !== -1;
+            console.log(animalStr.indexOf(filterVal));
+            return isMatch;
+          })
+          .map((animal) => {
+            return <li key={animal}>{animal ?? "nul, undefinedでした"}{animal === "Dog" && "★"}</li>
+
+            // return <li key={animal}>{animal}{animal === "Dog" ? "★" : ""}</li>
+
+            // if (animal === "Dog") {
+            //   return <li key={animal}>{animal}★</li>
+            // } else {
+            //   return <li key={animal}>{animal}</li>
+            // }
+
+
+          }
+          )
+        }
       </ul>
     </>
   );
