@@ -1,34 +1,34 @@
-import { useState } from "react";
-
+import {useState} from 'react';
 
 const Example = () => {
-  const [toggle, setToggle] = useState(true)
-  const [countA, setCountA] = useState(0);
-  const [countB, setCountB] = useState(0);
-  const toggleComponent = () => {
-    setToggle(!toggle);
-  }
+  const [ count, setCount ] = useState(0);
+  const countUp = () => {setCount(count+1)};
+  const countDown = () => {setCount(prevstate => prevstate -1)};
   return (
     <>
-      <button onClick={toggleComponent}>Toggle</button>
-      {toggle
-      ? <Count key="A" title="A" count={countA} setCount={setCountA} /> 
-      : <Count key="B" title="B" count={countB} setCount={setCountB}/>
-      }
+      <h3>練習問題</h3>
+      <p>カウントの更新（CountUpdate）と表示（CountResult）を別のコンポーネントに分離してください。Exampleコンポーネント内で現在のカウントの値を管理するstateを一つ定義してこれまでのレクチャーで実装したようなカウンターを作成してください。</p>
+      <CountResult title="カウント" count={count}/>
+      <CountUpdate countUp={countUp} countDown={countDown}/> 
+      {/* <CountUpdate setCount={setCount} />  */}
     </>
-  )
-}
+  );
+};
 
-const Count = ({title, count, setCount}) => {
-  const countUp = () => {
-    setCount((prevstate) => prevstate + 1);
-  };
-  const countDown = () => {
-    setCount(count - 1);
-  };
+const CountResult = ({title, count}) => <h3>{title}:{count}</h3>
+
+const CountUpdate = ({countUp, countDown}) => {
+// const CountUpdate = ({setCount}) => {
+  // const countUp = () => {;
+  //   // setCount(prev => prev + 1)
+  //   countUp1();
+  // };
+  // const countDown = () => {
+  //   // setCount(prev => prev - 1)
+  //   countDown1();
+  // };
   return (
     <>
-      <h3>{title}: {count}</h3>
       <button onClick={countUp}>+</button>
       <button onClick={countDown}>-</button>
     </>
