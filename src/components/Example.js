@@ -1,21 +1,19 @@
-import { Profile } from './Profile';
+import { useState } from "react";
 
-const persons = [
-  {name: "Taro", age: 10, hobbies:['aaa', 'bbb']},
-  {name: "nako", age: 8, hobbies:['ccc', 'ddd']},
-]
+const animals = ["Dog", "Cat", "Rat"];
 
 const Example = () => {
+  const [filterVal, setFilterVal] = useState("")
+
   return (
     <>
-      <h3>練習問題</h3>
-      <p>Profileコンポーネントを使用して、完成コードと同じ画面を作成してください。</p>
-      <p>また、Profileコンポーネント内のリスト表示部分にkeyを設定して、ワーニング表示がされないようにしてください。</p>
+      <h3>配列のフィルター</h3>
+      <input type="text" value={filterVal} onChange={(e) => setFilterVal(e.target.value)}/>
       <ul>
-        {persons.map((person) => (
-          <li key={person.name}>
-            <Profile {...person}/>
-          </li>
+        {animals
+          .filter((animal) => animal.indexOf(filterVal) >= 0)
+          .map((animal) => (
+          <li key={animal}>{animal}</li>
         ))}
       </ul>
     </>
