@@ -1,30 +1,26 @@
 import { useState } from 'react';
 
 const Example = () => {
-  const [val, setVal] = useState("");
+  const [fruit, setFruit] = useState("");
+  const onChange = (e) => setFruit(e.target.value);
+  const RADIO_COLLECTION = ["Apple", "Banana", "Cherry"];
+
   return (
     <>
-      {/* labelをクリックすると、同じidのtextareaがフォーカスされる*/}
-      <label htmlFor="456">ラベル</label> 
-      <div>
-        <input 
-          type="text"
-          id="123"
-          placeholder="こんにちは"
-          value={val}
-          onChange={(e) => setVal(e.target.value)} 
+      {RADIO_COLLECTION
+      .map((value) => (
+        <label key={value}>
+        <input
+          type="radio"
+          value={value}
+          checked={value === fruit}
+          onChange={onChange}
         />
-      </div>
-      <div>
-        <textarea
-          id="456"
-          placeholder="こんにちはTextArea"
-          value={val}
-          onChange={(e) => setVal(e.target.value)} 
-        />
-      </div>
-      <h3>{val}</h3>
-      <button onClick={() => setVal("")}>クリア</button>
+        {value}
+        </label>
+      ))}
+
+      <h3>私は{fruit}を食べたい！</h3>
     </>
   );
 };
