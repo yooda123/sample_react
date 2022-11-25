@@ -1,19 +1,39 @@
-import { useState } from "react";
+import Profile from "./Profile";
+import {useState} from 'react';
 
-const animals = ["Dog", "Cat", "Rat"];
+const persons = [
+  {
+    name: "Geo",
+    age: 18,
+    hobbies: ["sports", "music"],
+  },
+  {
+    name: "Tom",
+    age: 25,
+    hobbies: ["movie", "music"],
+  },
+  {
+    name: "Lisa",
+    age: 21,
+    hobbies: ["sports", "travel", "game"],
+  },
+];
 
 const Example = () => {
-  const [filterVal, setFilterVal] = useState("")
+  const [inputVal, setinputVal] = useState("");
 
   return (
     <>
-      <h3>配列のフィルター</h3>
-      <input type="text" value={filterVal} onChange={(e) => setFilterVal(e.target.value)}/>
+      <h3>練習問題</h3>
+      <p>入力欄を設置して、入力値と名前が一致したもののみ表示する仕組みを作成してください。</p>
+      <input type="text" value={inputVal} onChange={(e)=>setinputVal(e.target.value)} />
       <ul>
-        {animals
-          .filter((animal) => animal.indexOf(filterVal) >= 0)
-          .map((animal) => (
-          <li key={animal}>{animal}</li>
+        {persons
+        .filter((person) => person.name.indexOf(inputVal) !== -1)
+        .map((person) => (
+          <li key={person.name}>
+            <Profile {...person} />
+          </li>
         ))}
       </ul>
     </>
