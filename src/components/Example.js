@@ -1,26 +1,36 @@
 import { useState } from 'react';
 
+
 const Example = () => {
-  const [fruit, setFruit] = useState("");
-  const onChange = (e) => setFruit(e.target.value);
-  const RADIO_COLLECTION = ["Apple", "Banana", "Cherry"];
+  const [isChecked, setIsChecked] = useState(false);
+  const toggleChecked = (val) => {
+    console.log(val);
+    setIsChecked((prev) => {
+      console.log(prev);
+      return !prev;
+    });
+  } 
+  // const toggleChecked = (e) => {
+  //   setIsChecked((prevState) => {
+  //     console.log(prevState);
+  //     let state = !prevState;
+  //     return state;
+  //   });
+  // } 
 
   return (
     <>
-      {RADIO_COLLECTION
-      .map((value) => (
-        <label key={value}>
-        <input
-          type="radio"
-          value={value}
-          checked={value === fruit}
-          onChange={onChange}
-        />
-        {value}
-        </label>
-      ))}
-
-      <h3>私は{fruit}を食べたい！</h3>
+      <label htmlFor="my-check">
+        チェック
+      </label>
+      <input 
+        type="checkbox"
+        id="my-check"
+        checked={isChecked}
+        onChange={(e) => toggleChecked(e)}
+        // onChange={(e) => toggleChecked(e)}
+      />
+      <h3>{isChecked ? "チェックON" : "チェックOFF"}</h3>
     </>
   );
 };
