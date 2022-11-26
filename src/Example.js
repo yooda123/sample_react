@@ -1,8 +1,38 @@
 import { useState } from "react";
+import styled from 'styled-components';
 
-import SubButton from "./components/SubButton";
-import styles from "./Example.module.css";
-// console.log(styles);
+// POINT 拡張機能 styled-components.vscode-styled-components
+
+console.dir(styled);
+const StyledButton = styled.button`
+  margin: auto;
+  border-radius: 9999px;
+  border: none;
+  display: block;
+  width: 120px;
+  height: 60px;
+  font-weight: bold;
+  cursor: pointer;
+  background: ${({isSelected}) => isSelected ? 'pink' : ''};
+
+  @media (max-width: 600px) {
+    border-radius: 0;
+  }
+`;
+
+const OrangeButton = styled(StyledButton)`
+  background-color: orange;
+  :hover, :active {
+    color: red;
+    opacity: 0.7;
+  }
+
+  span {
+    font-size: 2em; 
+  }
+
+`;
+
 
 const Example = () => {
   const [isSelected, setIsSelected] = useState(false);
@@ -11,10 +41,11 @@ const Example = () => {
 
   return (
     <>
-      <button className={`${styles.btn} ${isSelected ? styles.selected : ""}`} onClick={clickHandler}>
+      <StyledButton isSelected={isSelected} onClick={clickHandler}>ボタンです</StyledButton>
+      <OrangeButton><span>押してね</span></OrangeButton>
+      <button className={`btn ${isSelected ? "selected" : ""}`} onClick={clickHandler}>
         ボタン
       </button>
-      <SubButton />
       <div style={{ textAlign: "center" }}>
         {isSelected && "クリックされました。"}
       </div>
