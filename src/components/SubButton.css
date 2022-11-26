@@ -1,0 +1,14 @@
+.btn {
+  margin: auto;
+  border-radius: 20%;
+  border: none;
+  display: block;
+  width: 80px;
+  height: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: greenyellow;
+}
