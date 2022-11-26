@@ -1,11 +1,6 @@
-import "./SubButton.css";
+import styles from "./SubButton.module.css";
 
-const SubButton = ({isSelected, clickHandler}) => {
-  return (
-    <button className={`btn ${isSelected ? "selected" : ""}`} onClick={clickHandler}>
-    サブボタン
-    </button>
-)
+const SubButton = () => {
+    return <button className={styles.btn}>サブボタン</button>
 }
-
-export default SubButton
+export default SubButton;
