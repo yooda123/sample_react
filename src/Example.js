@@ -4,6 +4,11 @@ import Toast from "./components/Toast";
 const Example = () => {
   const [toastOpen, setToastOpen] = useState(false);
 
+  const ModalPortal = ({ children }) => {
+    const target = document.querySelector(".container.start");
+    return createPortal(children, target);
+  }
+  
   return (
     <div>
       <h3>
