@@ -1,23 +1,25 @@
-// 引数で渡ってきたオブジェクトを変更しない！
+let value = 0;
+
+const Child = () => {
+  value++;
+  return <div>{value}</div>
+}
+
+const ChildPure = ({ value }) => {
+  return <div>:  {value}</div>
+}
 
 const Example = () => {
-  const num = { val: 10 };
-  const double = (num) => {
-    // num.val =  num.val * 2;
-    // return num;
-    const newNum = {...num, val: num.val * 2}
-    return newNum;
-  }
-
-  const newNum = double(num);
-  console.log('newNum: ' , newNum, 'num: ', num);
-
-  console.log(newNum === num);
+  let value = 0;
 
   return (
     <>
-      <h3>不変性（Immutability）</h3>
-      
+      <Child />
+      <Child />
+      <Child />
+      <ChildPure value={++value}/>
+      <ChildPure value={++value}/>
+      <ChildPure value={++value}/>
     </>
   );
 };
