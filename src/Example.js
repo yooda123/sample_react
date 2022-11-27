@@ -1,25 +1,14 @@
-let value = 0;
-
-const Child = () => {
-  value++;
-  return <div>{value}</div>
-}
-
-const ChildPure = ({ value }) => {
-  return <div>:  {value}</div>
-}
+import { useState } from "react";
 
 const Example = () => {
-  let value = 0;
-
+  const [ state, setState ] = useState(0);
+  const increment = () => {
+    setState(state + 1);
+  }
   return (
     <>
-      <Child />
-      <Child />
-      <Child />
-      <ChildPure value={++value}/>
-      <ChildPure value={++value}/>
-      <ChildPure value={++value}/>
+      <button onClick={increment}>+</button>
+      <h3>{state}</h3>
     </>
   );
 };
