@@ -1,27 +1,52 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 
-const Child = ({ state, setState }) => {
-   // POINT ReactでのImmutability
-  // 関数型（純粋関数）
-  // ・fn(決まった引数) -> 決まった戻り値
-  // ・関数外の状態（データ）は参照・変更しない。
-  // ・関数外に影響を及ぼさない。
-  // ・引数で渡された値を変更しない。（★Immutability）
-  return (
-    <>
-      <span>{state.value}</span>
-      <button onClick={() => setState({ ...state, value: state.value + 1 })}>+</button>
-    </>
-  );
-};
+// useState:状態の更新の仕方は利用側に託す。
+// useReducer:状態の更新の仕方も状態側で担当する。
 
+// 状態と処理の分離
+// useState: コンポーネントで更新用の処理を保持
+// useReducer: stateと一緒に更新用の処理を保持
+
+// 純粋性（純粋関数）
+// 特定の引数に特定の戻り値
+const reducer = (prev, { type, step }) => {
+  switch (type) {
+    case "+":
+      return prev + step;
+    case "-":
+      return prev - step;
+    default:
+      throw new Error('不明なactionです。')
+  }
+}
+
+// 不変性（Immutability）
 const Example = () => {
-  const [ state, setState ] = useState({ value: 0 });
-
+  const [state, setState] = useState(0);
+  const [rstate, dispatch] = useReducer(reducer, 0);
+  
+  const step = 2;
+  const countUp = () => {
+    setState((prev) => {
+      return prev + step
+    });
+  };
+  const rcountUp = () => {
+    dispatch({ type: "+", step: 2 });
+  };
+  const rcountDown = () => {
+    dispatch({ type: "-", step: 3 });
+  };
   return (
     <>
       <div>
-        <Child state={state} setState={setState} />
+        <h3>{state}</h3>
+        <button onClick={countUp}>+</button>
+      </div>
+      <div>
+        <h3>{rstate}</h3>
+        <button onClick={rcountUp}>+</button>
+        <button onClick={rcountDown}>-</button>
       </div>
     </>
   );
