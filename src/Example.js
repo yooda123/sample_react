@@ -1,53 +1,81 @@
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 
-// useState:状態の更新の仕方は利用側に託す。
-// useReducer:状態の更新の仕方も状態側で担当する。
+const CALC_OPTIONS = ["add", "minus", "divide", "multiply"];
 
-// 状態と処理の分離
-// useState: コンポーネントで更新用の処理を保持
-// useReducer: stateと一緒に更新用の処理を保持
-
-// 純粋性（純粋関数）
-// 特定の引数に特定の戻り値
-const reducer = (prev, { type, step }) => {
+const reducer = (state, {type, payload}) => {
   switch (type) {
-    case "+":
-      return prev + step;
-    case "-":
-      return prev - step;
+    case "change":
+        const ret = {...state, [payload.name]: payload.value}
+        // debugger
+        return ret;
+    case "add":
+      return {...state, result: state.a + state.b};
+    case "minus":
+      return {...state, result: state.a - state.b};
+    case "divide":
+      return {...state, result: state.a / state.b};
+    case "multiply":
+      return {...state, result: state.a * state.b};
     default:
-      throw new Error('不明なactionです。')
+      return new Error('不正な演算子です');
   }
 }
 
-// 不変性（Immutability）
 const Example = () => {
-  const [state, setState] = useState(0);
-  const [rstate, dispatch] = useReducer(reducer, 0);
-  
-  const step = 2;
-  const countUp = () => {
-    setState((prev) => {
-      return prev + step
-    });
+  const initState = {
+    a: 1,
+    b: 2,
+    result: 3,
   };
-  const rcountUp = () => {
-    dispatch({ type: "+", step: 2 });
+
+  const [state, dispatch] = useReducer(reducer, initState);
+
+  const calculate = (e) => {
+    dispatch(
+      { type: e.target.value }
+    );
   };
-  const rcountDown = () => {
-    dispatch({ type: "-", step: 3 });
-  };
+
+  const numChangeHandler = (e) => {
+    dispatch(
+      { type: 'change', payload: { name: e.target.name, value: parseInt(e.target.value) } }
+    );
+  }
+
   return (
     <>
-      <div>
-        <h3>{state}</h3>
-        <button onClick={countUp}>+</button>
-      </div>
-      <div>
-        <h3>{rstate}</h3>
-        <button onClick={rcountUp}>+</button>
-        <button onClick={rcountDown}>-</button>
-      </div>
+    <h3>練習問題</h3>
+    <p>useReducerを使って完成コードと同じ機能を作成してください。</p>
+    <div>
+    a:
+    <input
+      type="number"
+      name="a"
+      value={state.a}
+      onChange={numChangeHandler}
+    />
+    </div>
+    <div>
+    b:
+    <input
+      type="number"
+      name="b"
+      value={state.b}
+      onChange={numChangeHandler}
+      // onChange={() => {
+      //   numChangeHandler();
+      //   // calculate();
+      // }}
+    />
+    </div>
+    <select onChange={calculate}>
+      {CALC_OPTIONS.map((item) => {
+        return (
+         <option key={item} value={item}>{item}</option>
+        )  
+      })}
+    </select>
+    <h3>結果：{state.result}</h3>
     </>
   );
 };
