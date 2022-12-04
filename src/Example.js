@@ -1,44 +1,68 @@
-import { useState, useReducer } from 'react';
+import { useReducer } from "react";
+
+const CALC_OPTIONS = ["add", "minus", "divide", "multiply"];
+
+const reducer = (state, {payload}) => {
+  const newState = {...state, [payload.name]: payload.value};
+
+  switch(newState.type) {
+    case 'add':
+      return {...newState, result: newState.a + newState.b};
+    case 'minus':
+      return {...newState, result: newState.a - newState.b};
+    case 'multiply':
+      return {...newState, result: newState.a * newState.b};
+    case 'divide':
+      return {...newState, result: newState.a / newState.b};
+    default: 
+      throw new Error('不明なタイプです');
+  }
+}
 
 const Example = () => {
-  const [state, setState] = useState(0);
-  const [rstate, dispatch] = useReducer((prev, {type, step}) => {
-    switch(type) {
-      case '+':
-        return prev + step;
-      case '-':
-        return prev - step;
-      default: 
-        throw new Error('不明なアクションです');        
-    }
-    // if (action === '+') {
-    //   return ++prev;
-    // } else {
-    //   return --prev;
-    // }
-  }, 0);
+  const initState = {
+    a: 1,
+    b: 2,
+    result: 3,
+    type: 'add',
+  };
 
-  const countUp = () => {
-    setState(prev => ++prev);
+  const [state, dispatch] = useReducer(reducer, initState);
+
+  const calculate = (e) => {
+    dispatch({payload: {'name': e.target.name, 'value': e.target.value}});        
   }
-  const rcountUp = () => {
-    dispatch({ type: '+', step: 2 });
-  }
-  const rcountDown = () => {
-    dispatch({ type: '-', step: 3 });
+
+  const numChangeHandler = (e) => {
+    dispatch({payload: {'name': e.target.name, 'value': parseInt(e.target.value)}});
   }
 
   return (
     <>
-    <div>
-      <h3>{state}</h3>
-      <button onClick={countUp}>+</button>
-    </div>
-    <div>
-      <h3>{rstate}</h3>
-      <button onClick={rcountUp}>+</button>
-      <button onClick={rcountDown}>-</button>
-    </div>
+      <div>
+        a:
+        <input
+          type="number"
+          name="a"
+          value={state.a}
+          onChange={numChangeHandler}
+        />
+      </div>
+      <div>
+        b:
+        <input
+          type="number"
+          name="b"
+          value={state.b}
+          onChange={numChangeHandler}
+        />
+      </div>
+      <select name="type" onChange={calculate}>
+        {CALC_OPTIONS.map((item) => {
+          return <option key={item} value={item}>{item}</option>
+        })}
+      </select>
+      <h1>結果：{state.result}</h1>
     </>
   );
 };
