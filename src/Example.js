@@ -1,10 +1,19 @@
+import { useState, createContext } from "react";
 import Child from "./components/Child";
-import { createContext } from 'react';
+import OtherChild from "./components/OtherChild";
 
-export const MyContext = createContext('hello!!');
+export const MyContext = createContext("hello");
 
 const Example = () => {
-  return <Child />;
+  const [ value, setValue ] = useState(0);
+  return (
+    <>
+      <MyContext.Provider value={[ value, setValue ]}>
+        <Child />
+        <OtherChild />
+      </MyContext.Provider>
+    </>
+  );
 };
 
 export default Example;
