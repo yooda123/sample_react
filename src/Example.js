@@ -1,17 +1,16 @@
-import { useState, createContext } from "react";
-import Child from "./components/Child";
-import OtherChild from "./components/OtherChild";
-
-export const MyContext = createContext("hello");
+import "./Example.css";
+import Header from "./components/Header";
+import Main from "./components/Main";
+import { ThemeProvider } from "./components/ThemeContext";
 
 const Example = () => {
-  const [ value, setValue ] = useState(0);
+  
   return (
     <>
-      <MyContext.Provider value={[ value, setValue ]}>
-        <Child />
-        <OtherChild />
-      </MyContext.Provider>
+      <ThemeProvider>
+        <Header />
+        <Main />
+      </ThemeProvider>
     </>
   );
 };
