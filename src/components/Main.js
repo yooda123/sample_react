@@ -1,13 +1,15 @@
-import { useTheme } from "./ThemeContext";
-
+import { useTheme } from "../context/ThemeContext"
 
 const Main = () => {
   const [theme] = useTheme();
+
+  console.log('Main called');
+
   return (
     <main className={`content-${theme}`}>
-    <h1>テーマの切り替え</h1>
+      <h1>テーマの切り替え</h1>
     </main>
-  )
+  );
 };
 
 export default Main;

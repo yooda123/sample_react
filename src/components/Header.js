@@ -1,23 +1,33 @@
-import { useTheme } from "./ThemeContext";
+import { useTheme, useUpdateTheme } from "../context/ThemeContext"
+
 
 const Header = () => {
-  const [theme, setTheme] = useTheme();
-  const THEMES = ['light', 'dark', 'red'];
-  const changeTheme = (e) => setTheme(e.target.value)
+  const theme = useTheme();
+  const setTheme = useUpdateTheme();
+
+  const THEMES = ["light", "dark", "red"];
+
+  const changeTheme = (e) => setTheme(e.target.value);
+
+  console.log('Header called');
 
   return (
     <header className={`content-${theme}`}>
-    {THEMES.map((_theme) => {
-      return (
-        <label key={_theme}>
-          <input type="radio" value={_theme} checked={_theme === theme} onChange={changeTheme} />
-          {_theme}
-        </label>
-      )
-    })}
-  </header>
-
-  )
+      {THEMES.map((_theme) => {
+        return (
+          <label key={_theme}>
+            <input
+              type="radio"
+              value={_theme}
+              checked={theme === _theme}
+              onChange={changeTheme}
+            />
+            {_theme}
+          </label>
+        );
+      })}
+    </header>
+  );
 };
 
 export default Header;
