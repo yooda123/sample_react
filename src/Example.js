@@ -1,13 +1,18 @@
-import Counter from "./components/Counter";
-import { CounterProvider } from "./context/CounterContext";
+import Input from "./components/Input";
+import Select from "./components/Select";
+import Result from "./components/Result";
+import { CalcProvider } from "./context/CalcContext";
 
-// POINT useContext x useReducer
 const Example = () => {
+
   return (
     <>
-      <CounterProvider>
-        <Counter />
-      </CounterProvider>
+      <CalcProvider>
+        <Input name="a" />
+        <Input name="b" />
+        <Select />
+        <Result />
+      </CalcProvider>
     </>
   );
 };
