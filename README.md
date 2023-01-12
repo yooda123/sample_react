@@ -1,6 +1,3 @@
-https://dev.classmethod.jp/articles/amazon-redshift-tutorial-tuning-table-design/#toc-2
-https://docs.aws.amazon.com/ja_jp/redshift/latest/dg/tutorials-redshift.html
-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
